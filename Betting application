@@ -1,0 +1,62 @@
+Here is a simple betting app implemented in C++:
+
+```cpp
+#include <iostream>
+#include <cstdlib>
+#include <ctime>
+
+using namespace std;
+
+int main() {
+    int balance = 1000;
+    int betAmount;
+    int guess;
+    int dice;
+
+    while (balance > 0) {
+        cout << "Balance: " << balance << endl;
+        cout << "Enter bet amount: ";
+        cin >> betAmount;
+
+        if (betAmount > balance) {
+            cout << "Not enough balance. Please enter a smaller bet amount." << endl;
+            continue;
+        }
+
+        cout << "Enter your guess (1-6): ";
+        cin >> guess;
+
+        srand(time(0));
+        dice = rand() % 6 + 1;
+
+        cout << "The dice rolled: " << dice << endl;
+
+        if (guess == dice) {
+            balance += betAmount;
+            cout << "Congratulations! You won. Your balance is now: " << balance << endl;
+        } else {
+            balance -= betAmount;
+            cout << "Sorry, you lost. Your balance is now: " << balance << endl;
+        }
+
+        if (balance <= 0) {
+            cout << "You have run out of balance. Game over." << endl;
+            break;
+        }
+
+        char choice;
+        cout << "Do you want to continue playing? (Y/N): ";
+        cin >> choice;
+
+        if (choice != 'Y' && choice != 'y') {
+            break;
+        }
+    }
+
+    cout << "Thank you for playing the betting game!" << endl;
+
+    return 0;
+}
+```
+
+This betting app allows the user to enter a bet amount and a guess between 1 and 6. It then generates a random dice roll and compares it to the user's guess. If the guess matches the dice roll, the user wins and their balance increases by the bet amount. If the guess is incorrect, the user loses the bet amount. The game continues until the user runs out of balance or chooses to stop playing.
